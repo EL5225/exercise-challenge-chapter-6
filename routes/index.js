@@ -6,7 +6,7 @@ import {
   updateProfile,
 } from "../controllers/index.js";
 import { authenticated } from "../middlewares/index.js";
-import { imageUpload } from "../libs/multer/index.js";
+import { imageUpload } from "../libs/index.js";
 
 const router = Router();
 
