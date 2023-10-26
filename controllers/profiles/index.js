@@ -1,5 +1,4 @@
-import { imageKit } from "../../libs/imagekit/index.js";
-import { prisma } from "../../libs/prisma-client/index.js";
+import { imageKit, prisma } from "../../libs/index.js";
 import path from "path";
 
 export const updateProfile = async (req, res, next) => {
