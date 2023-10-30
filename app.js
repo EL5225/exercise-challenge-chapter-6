@@ -9,7 +9,7 @@ import {
 } from "./middlewares/error/index.js";
 
 const app = express();
-const { PORT } = process.env;
+const { PORT = 3000 } = process.env;
 app.use(express.json());
 
 app.use("/api/v1", router);
