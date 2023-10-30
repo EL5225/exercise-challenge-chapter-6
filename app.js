@@ -3,7 +3,9 @@ import "dotenv/config";
 import router from "./routes/index.js";
 import {
   notFoundHandler,
+  prismaErrorHandler,
   serverErrorHandler,
+  zodErrorHandler,
 } from "./middlewares/error/index.js";
 
 const app = express();
@@ -12,6 +14,8 @@ app.use(express.json());
 
 app.use("/api/v1", router);
 
+app.use(zodErrorHandler);
+app.use(prismaErrorHandler);
 app.use(serverErrorHandler);
 app.use(notFoundHandler);
 

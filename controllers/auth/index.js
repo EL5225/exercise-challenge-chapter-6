@@ -1,4 +1,4 @@
-import { prisma } from "../../libs/index.js";
+import { VSLogin, VSRegister, prisma } from "../../libs/index.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -8,6 +8,8 @@ export const register = async (req, res, next) => {
   try {
     const { first_name, last_name, email, password, confirm_password } =
       req.body;
+
+    VSRegister.parse(req.body);
 
     const userEmail = await prisma.user.findUnique({
       where: {
@@ -69,6 +71,7 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    VSLogin.parse(req.body);
 
     const user = await prisma.user.findUnique({
       where: {

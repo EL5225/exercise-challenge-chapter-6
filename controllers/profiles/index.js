@@ -1,4 +1,4 @@
-import { imageKit, prisma } from "../../libs/index.js";
+import { VSUpdateProfile, imageKit, prisma } from "../../libs/index.js";
 import path from "path";
 
 export const updateProfile = async (req, res, next) => {
@@ -6,6 +6,8 @@ export const updateProfile = async (req, res, next) => {
     const user = req.user;
     const { first_name, last_name, birth_date } = req.body;
     const profile_picture = req.file.buffer.toString("base64");
+
+    VSUpdateProfile.parse(req.body);
 
     const { url } = await imageKit.upload({
       fileName: Date.now() + path.extname(req.file.originalname),
