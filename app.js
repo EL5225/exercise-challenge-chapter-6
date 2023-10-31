@@ -1,6 +1,9 @@
 import express from "express";
 import "dotenv/config.js";
+import swaggerUi from "swagger-ui-express";
+import docs from "./docs/swagger-output.json" assert { type: "json" };
 import router from "./routes/index.js";
+import cors from "cors";
 import {
   notFoundHandler,
   prismaErrorHandler,
@@ -9,10 +12,15 @@ import {
 } from "./middlewares/error/index.js";
 
 const app = express();
-const { PORT = 3000 } = process.env;
+const { PORT } = process.env;
+const swaggerDocument = docs;
+
+app.use(cors());
 app.use(express.json());
 
 app.use("/api/v1", router);
+
+app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(zodErrorHandler);
 app.use(prismaErrorHandler);

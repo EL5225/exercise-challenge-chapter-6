@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "API docs Challenge 6",
+    "description": "API for challenge 6"
+  },
+  "servers": [
+    {
+      "url": "https://puce-relieved-moth.cyclic.app/api/v1",
+      "description": "deployment api"
+    },
+    {
+      "url": "http://localhost:3000/api/v1",
+      "description": "local api"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "auth endpoints"
+    },
+    {
+      "name": "Profiles",
+      "description": "profiles endpoints"
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "register user",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "luthfi"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "ramadhan"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "l@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123"
+                  },
+                  "confirm_password": {
+                    "type": "string",
+                    "example": "password123"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "login user",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "l@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password123"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/authenticate": {
+      "get": {
+        "tags": ["Auth"],
+        "description": "authenticate user",
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/profiles": {
+      "put": {
+        "tags": ["Profiles"],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "description": "Update profiles",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "example": "luthfi"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "example": "ramadhan"
+                  },
+                  "birth_date": {
+                    "type": "string",
+                    "example": "2000-01-01"
+                  },
+                  "profile_picture": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
