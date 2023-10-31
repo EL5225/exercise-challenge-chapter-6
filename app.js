@@ -18,6 +18,13 @@ const swaggerDocument = docs;
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: true,
+    message: "Welcome to API V1, Open /api/v1/docs to see the documentation",
+  });
+});
+
 app.use("/api/v1", router);
 
 app.use("/api/v1/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
