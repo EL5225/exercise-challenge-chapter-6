@@ -1,8 +1,8 @@
 # Challenge-chapter-6
 Binar Academy - BEJS 1 - Challenge chapter 6
 
-deploy app with cyclic.sh
-deploy db with neon.tech
+- deploying app with cyclic.sh
+- deploying db with neon.tech
 
 
 For Local:
